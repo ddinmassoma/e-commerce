@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Écran 27 pouces",
+    "description": "Grand écran idéal pour travailler sur plusieurs fenêtres.",
+    "price": "299 €"
+  },
+  {
+    "id": 2,
+    "name": "Clavier mécanique",
+    "description": "Clavier rétroéclairé pour une frappe rapide et précise.",
+    "price": "79 €"
+  },
+  {
+    "id": 3,
+    "name": "Souris sans fil",
+    "description": "Souris ergonomique avec connexion Bluetooth.",
+    "price": "49 €"
+  }
+]

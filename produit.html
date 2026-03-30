@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>TechStore</title>
+    </head>
+    <body>
+        <header>
+            <h1>TechStore</h1>
+            <nav>
+                <a href="index.php?page=accueil">Accueil</a>
+                <a href="index.php?page=catalogue">Catalogue</a>
+                <a href="index.php?page=formulaire_contact">Contact</a>
+                <a href="index.php?page=mention_legale">Mention légale</a>
+                <a href="index.php?page=profil">Profil</a>
+            </nav>
+        </header>
+        <section class="hero">
+            <h2>Leader international en informatique</h2>
+            <p>Nous sélectionnons les meilleurs équipements informatiques pour les développeurs et autres amateurs de technologie.</p>
+        </section>
+        <div id="fiche-produit">
+
+        </div>
+
+        <script>
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get("id");
+
+            fetch("products.json")
+            .then(res => res.json())
+            .then(data => {
+
+            const produit = data.find(p => p.id == id);
+
+            const fiche = document.getElementById("fiche-produit");
+
+            fiche.innerHTML = `
+                <h1>${produit.name}</h1>
+                <img src="${produit.image}">
+                <p>${produit.description}</p>
+                <p>Prix : ${produit.price} €</p>
+                <button>Ajouter au panier</button>
+                <a href="catalogue.html">Retour au catalogue</a>
+            `;
+        });
+        </script>
+        <footer>
+            <p>TechStore</p>
+            <p>contact@techstore.fr</p>
+            <p>01 23 45 67 89</p>
+        </footer>
+    </body>
+</html>
