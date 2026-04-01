@@ -1,5 +1,7 @@
 <?php
-$host = "127.0.0.1:3307";
+$host = "localhost";
+#$dbname = "dylan_ecom";
+#$host = "127.0.0.1:3307";
 $dbname = "e-commerce";
 $username = "root";
 $password = "";

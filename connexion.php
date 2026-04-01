@@ -10,7 +10,7 @@ require_once 'config/database.php';
     <input type="password" name="mot_de_passe" required>
 
     <button type="submit">Se connecter</button>
-    <p>Vous n'avez pas encore de compte ? <a href="index.php?page=profil">Inscrivez-vous</a></p>
+    <p>Vous n'avez pas encore de compte ? <a href="index.php?page=rejoindre">Inscrivez-vous</a></p>
 </form>
 
 <?php
@@ -32,10 +32,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $check->fetch();
 
     if ($user && password_verify($password, $user['Mot-de-passe'])) {
-        echo "Connexion réussie !";
-    } else {
-        echo "Email ou mot de passe incorrect.";
-    }
+
+    // ✅ Generate secure token
+    $token = bin2hex(random_bytes(32));
+
+    // ✅ Save token in DB
+    $update = $pdo->prepare("UPDATE utilisateurs SET token = ? WHERE ID = ?");
+    $update->execute([$token, $user['ID']]);
+
+    // ✅ Store token in cookie (recommended)
+    setcookie("auth_token", $token, time() + (86400 * 7), "/", "", false, true); // 7 days
+
+    echo "Connexion réussie !";
+    exit;
+
+} else {
+    echo "Email ou mot de passe incorrect.";
+    exit;
+}
         exit;
     }
 

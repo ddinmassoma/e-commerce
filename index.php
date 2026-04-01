@@ -19,6 +19,7 @@
                 <a href="index.php?page=mention_legale">Mention légale</a>
                 <a href="index.php?page=Condition">Conditions d'utilisation</a>
                 <a href="index.php?page=profil">Profil</a>
+                <a href="index.php?page=connexion">Connexion</a>   <!-- @TODO : Afficher conditionellement Se Connecter ou Se Déconnecter Suite a la disposition du token -->
             </nav>
         </header>
         <section class="hero">
@@ -27,24 +28,42 @@
         </section>
         <main>
             <?php 
-            if($page === 'accueil') {
-                include 'accueil.php';
-            } elseif($page === 'catalogue') {
-                include 'catalogue.php';
-            } elseif($page === 'formulaire_contact') {
-                include 'formulaire_contact.php';
-            } elseif($page === 'mention_legale') {
-                include 'mention_legale.php';
-            } elseif($page === 'profil') {
-                include 'profil.php';
-            } elseif($page === 'Condition') {
-                include 'Condition.php';
-            } elseif($page === 'connexion') {
-                include 'connexion.php';
+
+            switch ($page) {
+                case 'accueil':
+                    include 'accueil.php';
+                    break;
+                case 'catalogue':
+                    include 'catalogue.php';
+                    break;
+                case 'formulaire_contact':
+                    include 'formulaire_contact.php';
+                    break;        
+                case 'mention_legale':
+                    include 'mention_legale.php';
+                    break;
+                case 'profil':
+                    include 'profil.php';
+                    break;
+                case 'Condition':
+                    include 'Condition.php';
+                    break;    
+                case 'connexion':
+                    include 'connexion.php';
+                    break;      
+                case 'rejoindre':
+                    include 'rejoindre.php';
+                    break;      
+
+
+                default:
+                    //@TODO Page 404
+                    echo "<p>Page non trouvée</p>";
+                    break;
             }
-            else {
-                echo "<p>Page non trouvée</p>";
-            }
+
+        
+          
             ?> 
         </main>
         <footer>
