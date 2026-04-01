@@ -17,6 +17,7 @@
                 <a href="index.php?page=catalogue">Catalogue</a>
                 <a href="index.php?page=formulaire_contact">Contact</a>
                 <a href="index.php?page=mention_legale">Mention légale</a>
+                <a href="index.php?page=Condition">Conditions d'utilisation</a>
                 <a href="index.php?page=profil">Profil</a>
             </nav>
         </header>
@@ -36,7 +37,12 @@
                 include 'mention_legale.php';
             } elseif($page === 'profil') {
                 include 'profil.php';
-            } else {
+            } elseif($page === 'Condition') {
+                include 'Condition.php';
+            } elseif($page === 'connexion') {
+                include 'connexion.php';
+            }
+            else {
                 echo "<p>Page non trouvée</p>";
             }
             ?> 

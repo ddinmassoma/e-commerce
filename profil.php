@@ -16,6 +16,7 @@ require_once 'config/database.php';
     <input type="password" name="mot_de_passe" required>
 
     <button type="submit">Créer un compte</button>
+    <p>Vous avez déjà un compte ? <a href="index.php?page=connexion">Connectez-vous</a></p>
 </form>
 
 <?php
@@ -33,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // ✅ Check if email already exists
-    $check = $pdo->prepare("SELECT id FROM utilisateurs WHERE email = ?");
+    $check = $pdo->prepare("SELECT ID FROM utilisateurs WHERE `E-mail` = ?");
     $check->execute([$email]);
 
     if ($check->fetch()) {
@@ -46,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // ✅ Insert user
     $stmt = $pdo->prepare("
-        INSERT INTO utilisateurs (Nom, Prenom, Email, Mdp)
+        INSERT INTO utilisateurs (Nom, Prenom, `E-mail`, `Mot-de-passe`)
         VALUES (?, ?, ?, ?)
     ");
 
