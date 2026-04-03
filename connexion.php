@@ -22,7 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // ✅ Validation
     if (empty($email) || empty($password)) {
         echo "Tous les champs sont requis.";
-        exit;
     }
 
     // ✅ Vérification de l'utilisateur
@@ -44,13 +43,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     setcookie("auth_token", $token, time() + (86400 * 7), "/", "", false, true); // 7 days
 
     echo "Connexion réussie !";
-    exit;
 
 } else {
     echo "Email ou mot de passe incorrect.";
-    exit;
 }
-        exit;
     }
 
     // ✅ Hash password

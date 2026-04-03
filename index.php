@@ -57,8 +57,7 @@
 
 
                 default:
-                    //@TODO Page 404
-                    echo "<p>Page non trouvée</p>";
+                    include 'config/404.php';
                     break;
             }
 
