@@ -10,7 +10,7 @@ require_once 'config/database.php';
     <input type="password" name="mot_de_passe" required>
 
     <button type="submit">Se connecter</button>
-    <p>Vous n'avez pas encore de compte ? <a href="index.php?page=rejoindre">Inscrivez-vous</a></p>
+    <p>Vous n'avez pas encore de compte ? <a href="index.php?page=creation_compte">Inscrivez-vous</a></p>
 </form>
 
 <?php

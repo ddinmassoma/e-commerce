@@ -19,7 +19,7 @@
                 <a href="index.php?page=mention_legale">Mention légale</a>
                 <a href="index.php?page=Condition">Conditions d'utilisation</a>
                 <a href="index.php?page=profil">Profil</a>
-                <a href="index.php?page=connexion">Connexion</a>   <!-- @TODO : Afficher conditionellement Se Connecter ou Se Déconnecter Suite a la disposition du token -->
+                <a href="index.php?page=creation_compte">Connexion</a> 
             </nav>
         </header>
         <section class="hero">
@@ -51,9 +51,15 @@
                 case 'connexion':
                     include 'connexion.php';
                     break;      
-                case 'rejoindre':
-                    include 'rejoindre.php';
-                    break;      
+                case 'creation_compte':
+                    include 'creation_compte.php';
+                    break;
+                case 'panier':
+                    include 'panier.php';
+                    break;
+                case 'deconnexion':
+                    include 'deconnexion.php';
+                    break;
 
 
                 default:

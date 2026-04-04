@@ -1,5 +1,4 @@
 <?php 
-require_once 'middewares/auth.php';
 require_once 'config/database.php';
 ?>
 

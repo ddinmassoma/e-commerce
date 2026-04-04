@@ -1,63 +1,94 @@
-body{
-font-family:Arial, Helvetica, sans-serif;
-margin:0;
-background:#f4f6f8;
-color:#333;
+:root {
+    --primary: #6c5ce7; /* Un violet/bleu électrique plus moderne */
+    --secondary: #a29bfe;
+    --dark: #0f172a;    /* Un bleu très sombre, presque noir, pour le header */
+    --text: #1e293b;
+    --light: #f8fafc;
+    --border: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+    margin: 0;
+    background: var(--light);
+    color: var(--text);
+    line-height: 1.6;
 }
 
 /* HEADER */
-
-header{
-background:#1e2a38;
-color:white;
-padding:20px 40px;
+header {
+    background: var(--dark);
+    color: white;
+    padding: 1.5rem 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--primary);
 }
 
-header h1{
-margin:0;
+header h1 {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
-nav{
-margin-top:10px;
+nav a {
+    color: #cbd5e1;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 0.9rem;
+    transition: color 0.3s;
 }
 
-nav a{
-color:white;
-text-decoration:none;
-margin-right:20px;
-font-weight:bold;
-}
-
-nav a:hover{
-text-decoration:underline;
+nav a:hover {
+    color: var(--primary);
 }
 
 /* HERO SECTION */
-
-.hero{
-background:linear-gradient(120deg,#2d3e50,#4c6a85);
-color:white;
-padding:60px 40px;
+.hero {
+    background: radial-gradient(circle at top left, #1e293b, #0f172a);
+    color: white;
+    padding: 100px 10%;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
 }
 
-.hero h2{
-margin-top:0;
-font-size:32px;
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #fff, var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-/* MAIN */
-
-main{
-padding:40px;
+/* CARTES PRODUITS */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 40px 10%;
 }
 
-/* FOOTER */
-footer{
-background:#1e2a38;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:40px;
+.product {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid var(--border);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    border-color: var(--secondary);
+}
+
+.price {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary);
 }
 
 /* FORMULAIRES */
@@ -73,12 +104,14 @@ margin-top:40px;
   margin: 0 auto;
 }
 
+
 .contact label,
 .profil label {
   margin-top: 1rem;
   font-weight: bold;
   color: #2f3640;
 }
+
 
 .contact input,
 .contact textarea,
@@ -90,6 +123,7 @@ margin-top:40px;
   border-radius: 5px;
   font-size: 1rem;
 }
+
 
 .contact button,
 .profil button {
@@ -104,31 +138,35 @@ margin-top:40px;
   transition: background-color 0.3s;
 }
 
+
 .contact button:hover,
 .profil button:hover {
   background-color: #273c75;
 }
 
-/*ACCUEIL*/
-.products{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
+main {
+    /* 1. On limite la largeur maximale (ex: 1200px) */
+    max-width: 1200px; 
+    
+    /* 2. On centre le bloc horizontalement (auto) 
+          et on ajoute de l'espace en haut et en bas (40px) */
+    margin: 40px auto; 
+    
+    /* 3. On ajoute une marge interne pour que le texte ne colle pas 
+          aux bords sur les petits écrans (mobiles) */
+    padding: 0 20px; 
+    
+    /* 4. Optionnel : une hauteur minimale pour que le footer 
+          ne remonte pas trop si la page est presque vide */
+    min-height: 70vh; 
 }
 
-.product{
-    background:white;
-    padding:20px;
-    border-radius:8px;
-    box-shadow:0 3px 8px rgba(0,0,0,0.1);
-}
-
-.product h3{
-    margin-top:0;
-}
-
-.price{
-    font-weight:bold;
-    color:#2c7be5;
-    margin-top:10px;
+/* FOOTER */
+footer {
+    background: var(--dark);
+    padding: 40px;
+    border-top: 1px solid #1e293b;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    text-align: center;
 }

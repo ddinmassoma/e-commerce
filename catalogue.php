@@ -21,10 +21,6 @@
             <p class="price">${product.price}</p>
         `;
 
-        const btnPanier = document.createElement('button');
-        btnPanier.textContent = "Ajouter au panier";
-        div.appendChild(btnPanier);
-
         const btnDetails = document.createElement('button');
         btnDetails.textContent = "Voir les détails";
         btnDetails.addEventListener('click', () => voirProduit(product.id));

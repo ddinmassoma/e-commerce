@@ -34,26 +34,178 @@
             fetch("products.json")
             .then(res => res.json())
             .then(data => {
+                const produit = data.find(p => p.id == id);
 
-            const produit = data.find(p => p.id == id);
+                if (produit) {
+                    const fiche = document.getElementById("fiche-produit");
+                    
+                    // On utilise les noms EXACTS de votre JSON : name, origin, price, note
+                    fiche.innerHTML = `
+                        <img src="${produit.image}" alt="${produit.name}">
+                        
+                        <div class="product-info">
+                            <h1>${produit.name}</h1>
+                            <div class="badges">
+                                <span class="badge">📍 Origine : ${produit.origin || "Inconnue"}</span><br>
+                                <span class="badge">⭐ ${produit.note || "Non noté"} / 5</span>
+                            </div>
+                            
+                            <p>${produit.description}</p>
+                            
+                            <p class="price-tag">${produit.price}</p>
+                            
+                            <div class="btn-container">
+                                <button onclick="ajouterAuPanier(${produit.id})">Ajouter au panier</button>
+                                <button><a href="index.php?page=catalogue" class="btn-secondary">Retour au catalogue</a></button>
+                                <button><a href="index.php?page=accueil" class="btn-secondary">Retour à l'accueil</a></button>
+                            </div>
+                        </div>
 
-            const fiche = document.getElementById("fiche-produit");
+                        <style>
+                            a {
+                            text-decoration: none;
+                            color: inherit;
+                        }
 
-            fiche.innerHTML = `
-                <h1>${produit.name}</h1>
-                <img src="${produit.image}">
-                <p>${produit.description}</p>
-                <p>Prix : ${produit.price} €</p>
-                <button>Ajouter au panier</button>
-                <button><a href="index.php?page=catalogue">Retour au catalogue</a></button>
-                <button><a href="index.php?page=accueil">Retour à l'accueil</a></button>
-                <style>
-                    a {
-                        text-decoration: none;
-                        color: inherit;
-                    }
-            `;
-        });
+                           /* Conteneur principal de la fiche */
+                        #fiche-produit {
+                            max-width: 900px;
+                            margin: 40px auto;
+                            padding: 20px;
+                            background: #fff;
+                            border-radius: 12px;
+                            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 30px;
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            color: #333;
+                        }
+
+                        /* Partie Image */
+                        #fiche-produit img {
+                            flex: 1;
+                            min-width: 300px;
+                            max-width: 100%;
+                            height: auto;
+                            border-radius: 8px;
+                            object-fit: contain;
+                            background: #f9f9f9;
+                            padding: 10px;
+                        }
+
+                        /* Partie Informations */
+                        .product-info {
+                            flex: 1.2;
+                            min-width: 300px;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                        }
+
+                        #fiche-produit h1 {
+                            font-size: 2rem;
+                            margin-bottom: 15px;
+                            color: #2c3e50;
+                        }
+
+                        #fiche-produit p {
+                            line-height: 1.6;
+                            margin-bottom: 10px;
+                        }
+
+                        /* Style spécifique pour le prix */
+                        .price-tag {
+                            font-size: 1.5rem;
+                            font-weight: bold;
+                            color: #27ae60;
+                            margin: 20px 0;
+                        }
+
+                        /* Badges pour Origine et Note */
+                        .badge {
+                            display: inline-block;
+                            padding: 4px 12px;
+                            background: #f0f2f5;
+                            border-radius: 20px;
+                            font-size: 0.9rem;
+                            margin-right: 10px;
+                            color: #555;
+                        }
+
+                        /* Boutons */
+                        .btn-container {
+                            margin-top: 25px;
+                            display: flex;
+                            gap: 10px;
+                            flex-wrap: wrap;
+                        }
+
+                        button {
+                            padding: 12px 20px;
+                            border: none;
+                            border-radius: 6px;
+                            cursor: pointer;
+                            font-weight: 600;
+                            transition: transform 0.2s, background 0.2s;
+                        }
+
+                        button:first-of-type { /* Ajouter au panier */
+                            background-color: #3498db;
+                            color: white;
+                            flex-grow: 2;
+                        }
+
+                        button:first-of-type:hover {
+                            background-color: #2980b9;
+                            transform: translateY(-2px);
+                        }
+
+                        /* Liens déguisés en boutons secondaires */
+                        .btn-secondary {
+                            background-color: #ecf0f1;
+                            color: #333;
+                            text-decoration: none;
+                            padding: 12px 15px;
+                            border-radius: 6px;
+                            font-size: 0.9rem;
+                            text-align: center;
+                        }
+
+                        .btn-secondary:hover {
+                            background-color: #bdc3c7;
+                        }
+
+                        /* Responsive mobile */
+                        @media (max-width: 600px) {
+                            #fiche-produit {
+                                flex-direction: column;
+                                margin: 10px;
+                            }
+                        }
+                    </style> 
+                    `;
+                } else {
+                    document.getElementById("fiche-produit").innerHTML = "Produit non trouvé.";
+                }
+            });
+
+        function ajouterAuPanier(produitId) {
+            const formData = new FormData();
+            formData.append('produit_id', produitId);
+
+            fetch('ajouter_panier.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alert("Produit ajouté au panier !");
+                }
+            })
+            .catch(err => alert("Veuillez vous connecter pour ajouter au panier"));
+        }
         </script>
         <footer>
             <p>TechStore</p>

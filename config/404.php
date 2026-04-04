@@ -1,3 +1,7 @@
+<?php
+    http_response_code(404);
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -82,7 +86,7 @@
             Continuez votre navigation sur TechStore pour trouver vos produits informatiques.
         </p>
 
-        <a href="/" class="btn">Retour à l'accueil</a>
+        <a href="index.php?page=accueil" class="btn">Retour à l'accueil</a>
     </div>
 
     <footer>
