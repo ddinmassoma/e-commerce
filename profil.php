@@ -16,4 +16,5 @@ require_once 'config/database.php';
 
 <button><a href="index.php?page=panier">Voir mon panier</a></button>
 <button><a href="index.php?page=deconnexion">Se déconnecter</a></button>
+<button><a href="index.php?page=commandes">Voir mes commandes</a></button>
 

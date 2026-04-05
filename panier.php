@@ -32,3 +32,11 @@ $items = $stmt->fetchAll();
         </table>
     <?php endif; ?>
 </div>
+<button><a href="index.php?page=profil">Retour au profil</a></button>
+<button><a href="index.php?page=commandes">Commander</a></button>
+<style>
+        a {
+        text-decoration: none;
+        color: inherit;
+    }
+</style>

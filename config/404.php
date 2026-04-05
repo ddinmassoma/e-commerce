@@ -1,15 +1,19 @@
-<?php
-    http_response_code(404);
-?>
+<body>
+    <div class="container">
+        <div class="icon">💻</div>
+        <h1>404</h1>
+        <h2>Oups… page introuvable</h2>
+        <p>
+            La page que vous recherchez n'existe pas ou a été déplacée.<br>
+            Continuez votre navigation sur TechStore pour trouver vos produits informatiques.
+        </p>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>404 - Page introuvable | TechStore</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <style>
+        <a href="index.php?page=accueil" class="btn">Retour à l'accueil</a>
+    </div>
+
+</body>
+
+<style>
         * {
             margin: 0;
             padding: 0;
@@ -17,19 +21,11 @@
             font-family: Arial, sans-serif;
         }
 
-        body {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
         .container {
             max-width: 600px;
             padding: 20px;
+            margin: 100px auto;
+            text-align: center;
         }
 
         h1 {
@@ -43,7 +39,7 @@
         }
 
         p {
-            color: #cbd5f5;
+            font-size: 18px;
             margin-bottom: 25px;
         }
 
@@ -65,33 +61,4 @@
             font-size: 50px;
             margin-bottom: 20px;
         }
-
-        footer {
-            position: absolute;
-            bottom: 15px;
-            font-size: 12px;
-            color: #94a3b8;
-        }
     </style>
-</head>
-
-<body>
-
-    <div class="container">
-        <div class="icon">💻</div>
-        <h1>404</h1>
-        <h2>Oups… page introuvable</h2>
-        <p>
-            La page que vous recherchez n'existe pas ou a été déplacée.<br>
-            Continuez votre navigation sur TechStore pour trouver vos produits informatiques.
-        </p>
-
-        <a href="index.php?page=accueil" class="btn">Retour à l'accueil</a>
-    </div>
-
-    <footer>
-        © 2026 TechStore - Tous droits réservés
-    </footer>
-
-</body>
-</html>
