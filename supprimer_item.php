@@ -9,3 +9,4 @@ if (isset($_GET['id'])) {
 
 header("Location: index.php?page=panier");
 exit;
+?>
