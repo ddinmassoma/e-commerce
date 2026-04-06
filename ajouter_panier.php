@@ -1,18 +1,27 @@
 <?php
-require_once 'middewares/auth.php';
+ini_set('display_errors', 0);
+header('Content-Type: application/json');
 require_once 'config/database.php';
+require_once 'middewares/auth.php';
+
 
 if (isset($_POST['produit_id'])) {
     $produit_id = $_POST['produit_id'];
-    $utilisateur_id = $currentUser['ID'];
+    $prix = $_POST['price'];
+    $nom_produit = $_POST['name'];
 
-    if (!isset($currentUser)) {
+    
+
+    if (!isset($currentUser) || !isset($produit_id)) {
         echo json_encode([
             "status" => "error",
             "message" => "Utilisateur non connecté"
         ]);
         exit;
     }
+
+    $utilisateur_id = $currentUser['ID'];
+
 
     // On vérifie si le produit est déjà dans le panier
     $check = $pdo->prepare("SELECT id FROM panier WHERE utilisateur_id = ? AND produit_id = ?");

@@ -2,7 +2,11 @@
 require_once 'config/database.php';
 
 if (!isset($_COOKIE['auth_token'])) {
-    return null;
+    echo json_encode([
+        "status" => "error",
+        "message" => "Non authentifié"
+    ]);
+    exit;
 }
 
 $token = $_COOKIE['auth_token'];
@@ -13,8 +17,11 @@ $check->execute([$token]);
 $user = $check->fetch();
 
 if (!$user) {
-    return null;
+    echo json_encode([
+        "status" => "error",
+        "message" => "Utilisateur invalide"
+    ]);
+    exit;
 }
 
 $currentUser = $user;
-?>

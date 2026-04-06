@@ -31,6 +31,7 @@
             const params = new URLSearchParams(window.location.search);
             const id = params.get("id");
 
+
             fetch("products.json")
             .then(res => res.json())
             .then(data => {
@@ -54,7 +55,7 @@
                             <p class="price-tag">${produit.price}</p>
                             
                             <div class="btn-container">
-                                <button onclick="ajouterAuPanier(${produit.id})">Ajouter au panier</button>
+                                <button onclick="ajouterAuPanier(${produit.id}, ${produit.price}, '${encodeURIComponent(produit.name)}')">Ajouter au panier</button>
                                 <button><a href="index.php?page=catalogue" class="btn-secondary">Retour au catalogue</a></button>
                                 <button><a href="index.php?page=accueil" class="btn-secondary">Retour à l'accueil</a></button>
                             </div>
@@ -189,11 +190,38 @@
                 }
             });
 
-        function ajouterAuPanier(produitId) {
+            function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            
+            if(value.length > 0){
+                return true
+            }else {
+                return false
+            }
+        }
+
+        function ajouterAuPanier(produitId,price,name) {
+             name = decodeURIComponent(name);
+
+            const userToken = getCookie("auth_token");
+            console.log(userToken);
+            
+            
+            if(!userToken){
+                alert('Vous devez vous connecter pour passer un achat');
+                return
+            }
+            
+
+
             const formData = new FormData();
             formData.append('produit_id', produitId);
+            formData.append('price', price);
+            formData.append('name', name);
 
-            fetch('ajouter_panier.php', {
+            
+
+            const result = fetch('ajouter_panier.php', {
                 method: 'POST',
                 body: formData,
                 credentials: 'same-origin'
@@ -210,6 +238,9 @@
                 console.error("Erreur lors de l'ajout au panier :", err);
                 alert("Une erreur est survenue. Veuillez réessayer.");
             });
+
+            console.log(result,"résultat requete");
+            
         }
         </script>
         <footer>
