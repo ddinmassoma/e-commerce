@@ -17,12 +17,14 @@ $items = $stmt->fetchAll();
             <tr>
                 <th>Produit</th>
                 <th>Quantité</th>
+                <th>Prix Unitaire</th>
                 <th>Action</th>
             </tr>
             <?php foreach ($items as $item): ?>
                 <tr>
-                    <td>Produit ID : <?php echo $item['produit_id']; ?></td>
+                    <td>Produit ID : <?php echo $item['nom_produit']; ?></td>
                     <td><?php echo $item['quantite']; ?></td>
+                    <td><?php echo $item['prix']; ?> €</td>
                     <td>
                         <a href="supprimer_item.php?id=<?php echo $item['id']; ?>" 
                            style="color:red;">Supprimer</a>

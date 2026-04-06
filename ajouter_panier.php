@@ -24,8 +24,8 @@ if (isset($_POST['produit_id'])) {
         $update->execute([$exists['id']]);
     } else {
         // On insère le nouveau produit
-        $insert = $pdo->prepare("INSERT INTO panier (utilisateur_id, produit_id, quantite) VALUES (?, ?, 1)");
-        $insert->execute([$utilisateur_id, $produit_id]);
+        $insert = $pdo->prepare("INSERT INTO panier (utilisateur_id, produit_id, quantite, prix, nom_produit) VALUES (?, ?, 1, ?, ?)");
+        $insert->execute([$utilisateur_id, $produit_id, $prix, $nom_produit]);
     }
     echo json_encode(["status" => "success"]);
 } else {
