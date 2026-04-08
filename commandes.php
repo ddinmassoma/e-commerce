@@ -2,37 +2,50 @@
 require_once 'middewares/auth.php';
 require_once 'config/database.php';
 
-// Récupérer les items du panier pour cet utilisateur
-$stmt = $pdo->prepare("SELECT * FROM panier WHERE utilisateur_id = ?");
+$stmt = $pdo->prepare("SELECT * FROM commande WHERE id_utilisateur = ? ORDER BY id_commande DESC");
 $stmt->execute([$currentUser['id']]);
-$items = $stmt->fetchAll();
+$commandes = $stmt->fetchAll();
 ?>
 
 <h2>Vos Commandes</h2>
-<div>
-    <?php if (empty($items)): ?>
-        <p>Vous n'avez aucune commandes</p>
+<div class="commandes-container">
+    <?php if (empty($commandes)): ?>
+        <p>Vous n'avez passé aucune commande pour le moment.</p>
     <?php else: ?>
         <table border="1">
-            <tr>
-                <th>Produit</th>
-                <th>Quantité</th>
-                <th>Total</th>
-            </tr>
-            <?php foreach ($items as $item): ?>
+            <thead>
                 <tr>
-                    <td><?php echo $item['nom_produit']; ?></td>
-                    <td><?php echo $item['quantite']; ?></td>
-                    <td><?php echo $item['prix'] * $item['quantite']; ?> €</td>
+                    <th>Produit(s)</th>
+                    <th>Quantité (Nb articles)</th>
+                    <th>Prix Total</th>
+                    <th>Statut</th>
+                    <th>Adresse</th>
                 </tr>
-            <?php endforeach; ?>
+            </thead>
+            <tbody>
+                <?php foreach ($commandes as $commande): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($commande['nom_produit']); ?></td>
+                        <td><?php echo htmlspecialchars($commande['quantite']); ?></td>
+                        <td><?php echo htmlspecialchars($commande['prix_commande']); ?> €</td>
+                        <td><strong><?php echo htmlspecialchars($commande['statut']); ?></strong></td>
+                        <td><?php echo htmlspecialchars($commande['adresse']); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
         </table>
     <?php endif; ?>
 </div>
+
+<br>
 <button><a href="index.php?page=profil">Retour au profil</a></button>
+
 <style>
-        a {
-        text-decoration: none;
-        color: inherit;
-    }
+    .commandes-container { margin-top: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    th, td { padding: 10px; text-align: left; border: 1px solid #ddd; }
+    th { background-color: #f4f4f4; }
+    a { text-decoration: none; color: inherit; }
+    button { padding: 10px 15px; cursor: pointer; background: #3b6e9e; color: white; border: none; border-radius: 4px; }
+    button:hover { background: #2f5a82; }
 </style>

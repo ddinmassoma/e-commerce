@@ -229,9 +229,3 @@ footer {
 .contact button:hover {
     background: #2980b9;
 }
-
-@media (max-width: 768px) {
-    .contact-container {
-        flex-direction: column;
-    }
-}

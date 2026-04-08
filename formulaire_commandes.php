@@ -120,12 +120,18 @@ if($action === 'commander') {
     $stmt = $pdo->prepare("SELECT nom_produit, quantite, prix FROM panier WHERE utilisateur_id = ?");
     $stmt->execute([$currentUser['id']]);
     $produits = $stmt->fetchAll();
+    if (!$produits) {
+            die("Votre panier est vide.");
+        }
 
-    // Calculer le total de la commande
-    $total = 0;
-    foreach ($produits as $produit) {
-        $total += $produit['prix'] * $produit['quantite'];
-    }
+    // Calcul du total et préparation des noms de produits
+        $total = 0;
+        $noms_liste = [];
+        foreach ($produits as $p) {
+            $total += $p['prix'] * $p['quantite'];
+            $noms_liste[] = $p['nom_produit'];
+        }
+        $tous_les_produits = implode(', ', $noms_liste); // Transforme le tableau en texte
 
     //Récupérer les informations du client
     $stmt = $pdo->prepare("SELECT nom, prenom, email FROM utilisateurs WHERE id = ?");
@@ -138,11 +144,37 @@ if($action === 'commander') {
         exit;
     }
 
-    $sql = "INSERT INTO commandes (utilisateur_id, adresse, statut, quantite, nom_utilisateur, prenom_utilisateur, email_utilisateur, nom_produit, prix_commande) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    //Insérer la commande dans la base de données
+    $sql = "INSERT INTO commande (
+                    id_utilisateur, 
+                    adresse, 
+                    statut, 
+                    quantite, 
+                    nom_utilisateur, 
+                    prenom_utilisateur, 
+                    email_utilisateur, 
+                    nom_produit, 
+                    prix_commande
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$currentUser['id'], $adresse, 'en attente', count($produits), $client['nom'], $client['prenom'], $client['email'], $produits['nom_produit'], $total]);
+    $success = $stmt->execute([
+        $currentUser['id'], 
+        $adresse, 
+        'en attente', 
+        count($produits), 
+        $client['nom'], 
+        $client['prenom'], 
+        $client['email'], 
+        $tous_les_produits, 
+        $total
+    ]);
 
-    echo  "Commande passée avec succès!";
+    if ($success) {
+            echo "Commande passée avec succès !";
+            // Optionnel : vider le panier ici
+        } else {
+            echo "Erreur lors de l'enregistrement.";
+        }
 } else {
     echo "Action non reconnue.";
 }

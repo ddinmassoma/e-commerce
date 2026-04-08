@@ -48,13 +48,6 @@ require 'PHPMailer-master/src/SMTP.php';
              referrerpolicy="no-referrer-when-downgrade">
             </iframe>
 
-        <div class="info-box">
-            <h3>Contact</h3>
-            <p>Tour Eiffel, Paris</p>
-            <p>+33 23 45 67 89</p>
-            <p>contact@techstore.fr</p>
-        </div>
-
     </div>
 
 </div>

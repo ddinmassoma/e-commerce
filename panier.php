@@ -9,7 +9,7 @@ $items = $stmt->fetchAll();
 ?>
 
 <h2>Votre Panier</h2>
-<div id="contenu-panier">
+<div class="panier-container">
     <?php if (empty($items)): ?>
         <p>Votre panier est vide.</p>
     <?php else: ?>
@@ -37,8 +37,11 @@ $items = $stmt->fetchAll();
 <button><a href="index.php?page=profil">Retour au profil</a></button>
 <button><a href="index.php?page=formulaire_commandes">Commander</a></button>
 <style>
-        a {
-        text-decoration: none;
-        color: inherit;
-    }
+    .panier-container { margin-top: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    th, td { padding: 10px; text-align: left; border: 1px solid #ddd; }
+    th { background-color: #f4f4f4; }
+    a { text-decoration: none; color: inherit; }
+    button { padding: 10px 15px; cursor: pointer; background: #3b6e9e; color: white; border: none; border-radius: 4px; }
+    button:hover { background: #2f5a82; }
 </style>
