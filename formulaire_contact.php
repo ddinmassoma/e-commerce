@@ -12,24 +12,52 @@ require 'PHPMailer-master/src/SMTP.php';
 
 
 
-<form action="" method="post" class="contact">
-    <label>Nom :</label>
-    <input type="text" name="nom" required>
+<div class="contact-container">
 
-    <label>Prénom :</label>
-    <input type="text" name="prenom" required>
+    <!-- FORM -->
+    <div class="contact-form">
+        <form action="" method="post" class="contact">
+            <label>Nom :</label>
+            <input type="text" name="nom" required>
 
-    <label>Email :</label>
-    <input type="email" name="email" required>
+            <label>Prénom :</label>
+            <input type="text" name="prenom" required>
 
-    <label>Sujet :</label>
-    <input type="text" name="sujet" required>
+            <label>Email :</label>
+            <input type="email" name="email" required>
 
-    <label>Message :</label>
-    <textarea name="message" required></textarea>
+            <label>Sujet :</label>
+            <input type="text" name="sujet" required>
 
-    <button type="submit">Envoyer</button>
-</form>
+            <label>Message :</label>
+            <textarea name="message" required></textarea>
+
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+
+    <!-- MAP + CONTACT -->
+    <div class="contact-info">
+
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5250.23891816132!2d2.2932440986965794!3d48.855932394428145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701fecd7f1bb%3A0xda0b3d0ab838114d!2sTour%20Eiffel%20-%20Parc%20du%20Champ-de-Mars%2C%2075007%20Paris%2C%20France!5e0!3m2!1sen!2sdz!4v1775673855226!5m2!1sen!2sdz"
+             width="100%" 
+             height="400" 
+             style="border:0;" 
+             allowfullscreen="" 
+             loading="lazy" 
+             referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+
+        <div class="info-box">
+            <h3>Contact</h3>
+            <p>Tour Eiffel, Paris</p>
+            <p>+33 23 45 67 89</p>
+            <p>contact@techstore.fr</p>
+        </div>
+
+    </div>
+
+</div>
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

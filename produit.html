@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
         <link rel="stylesheet" href="style.css">
         <title>TechStore</title>
     </head>
@@ -17,6 +18,11 @@
                 <a href="index.php?page=Condition">Conditions d'utilisation</a>
                 <a href="index.php?page=profil">Profil</a>
                 <a href="index.php?page=connexion">Connexion</a>   <!-- @TODO : Afficher conditionellement Se Connecter ou Se Déconnecter Suite a la disposition du token -->
+                 <a href="index.php?page=panier" class="cart-link">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            
             </nav>
         </header>
         <section class="hero">
@@ -26,10 +32,16 @@
         <div id="fiche-produit">
 
         </div>
-
+        
         <script>
             const params = new URLSearchParams(window.location.search);
             const id = params.get("id");
+
+            fetch('get_cart_count.php')
+                .then(res => res.json())
+                .then(data => {
+                    document.querySelector('.cart-count').innerText = data.count;
+                });
 
 
             fetch("products.json")
@@ -230,6 +242,7 @@
             .then(data => {
                 if (data.status === "success") {
                     alert("Produit ajouté au panier !");
+                    document.location.reload();
                 } else {
                     alert("Erreur : " + data.message);
                 }

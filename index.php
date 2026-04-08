@@ -1,11 +1,47 @@
 <?php  
+require_once 'config/database.php';
+$cartCount = 0;
+$currentUser = null;
+
     $page = $_GET['page'] ?? 'accueil'; 
+
+    if (isset($_COOKIE['auth_token'])) {
+    $token = $_COOKIE['auth_token'];
+
+    $check = $pdo->prepare("SELECT id FROM utilisateurs WHERE token = ?");
+    $check->execute([$token]);
+
+    $user = $check->fetch();
+
+    if ($user) {
+        $currentUser = $user;
+
+        // 🔢 compter les produits (somme des quantités)
+        $stmt = $pdo->prepare("SELECT SUM(quantite) as total FROM panier WHERE utilisateur_id = ?");
+        $stmt->execute([$user['id']]);
+
+        $result = $stmt->fetch();
+        $cartCount = $result['total'] ?? 0;
+    }
+}
+
+if (isset($_COOKIE['auth_token'])) {
+    $token = $_COOKIE['auth_token'];
+
+    $check = $pdo->prepare("SELECT id, prenom FROM utilisateurs WHERE token = ?");
+    $check->execute([$token]);
+    $currentUser = $check->fetch();
+}
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
         <link rel="stylesheet" href="style.css">
         <title>TechStore</title>
     </head>
@@ -18,8 +54,22 @@
                 <a href="index.php?page=formulaire_contact">Contact</a>
                 <a href="index.php?page=mention_legale">Mention légale</a>
                 <a href="index.php?page=Condition">Conditions d'utilisation</a>
-                <a href="index.php?page=profil">Profil</a>
-                <a href="index.php?page=creation_compte">Connexion</a> 
+                <!-- <a href="index.php?page=profil">Profil</a> -->
+                <?php if ($currentUser): ?>
+                        <a href="index.php?page=profil">
+                            👤 <?= htmlspecialchars($currentUser['prenom']) ?>
+                        </a>
+                        <a href="index.php?page=deconnexion" style="color:red;">
+                            Déconnexion
+                        </a>
+                    <?php else: ?>
+                        <a href="index.php?page=connexion">Connexion</a>
+                    <?php endif; ?> 
+
+                <a href="index.php?page=panier" class="cart-link">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count"><?= $cartCount ?></span>
+                </a>
             </nav>
         </header>
         <section class="hero">

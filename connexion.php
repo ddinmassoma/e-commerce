@@ -4,10 +4,10 @@ require_once 'config/database.php';
 
 <form action="" method="post" class="profil">
     <label>Email :</label>
-    <input type="email" name="email" required>
+    <input type="email" name="email" autocomplete="email" required>
 
     <label>Mot de passe :</label>
-    <input type="password" name="mot_de_passe" required>
+    <input type="password" name="mot_de_passe" autocomplete="current-password" required>
 
     <button type="submit">Se connecter</button>
     <p>Vous n'avez pas encore de compte ? <a href="index.php?page=creation_compte">Inscrivez-vous</a></p>
@@ -42,7 +42,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // ✅ Store token in cookie (recommended)
     setcookie("auth_token", $token, time() + (86400 * 7), "/", "", false, true); // 7 days
 
-    echo "Connexion réussie !";
+    header("Location: index.php?page=profil");
+    exit;
+
 
 } else {
     echo "Email ou mot de passe incorrect.";
