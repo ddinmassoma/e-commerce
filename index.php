@@ -60,6 +60,12 @@
                 case 'deconnexion':
                     include 'deconnexion.php';
                     break;
+                case 'formulaire_commandes':
+                    include 'formulaire_commandes.php';
+                    break;
+                case 'commandes':
+                    include 'commandes.php';
+                    break;
 
 
                 default:

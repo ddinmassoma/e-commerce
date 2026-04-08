@@ -11,7 +11,7 @@ require_once 'config/database.php';
 </style>
 
 <h1>
-    Bonjour <?php echo htmlspecialchars($currentUser['Prenom']); ?> 👋
+    Bonjour <?php echo htmlspecialchars($currentUser['prenom']); ?> 👋
 </h1>
 
 <button><a href="index.php?page=panier">Voir mon panier</a></button>

@@ -20,7 +20,7 @@ if (isset($_POST['produit_id'])) {
         exit;
     }
 
-    $utilisateur_id = $currentUser['ID'];
+    $utilisateur_id = $currentUser['id'];
 
 
     // On vérifie si le produit est déjà dans le panier

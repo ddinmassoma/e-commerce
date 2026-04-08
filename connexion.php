@@ -25,19 +25,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // ✅ Vérification de l'utilisateur
-    $check = $pdo->prepare("SELECT ID, `Mot-de-passe` FROM utilisateurs WHERE `E-mail` = ?");
+    $check = $pdo->prepare("SELECT id, mot_de_passe FROM utilisateurs WHERE email = ?");
     $check->execute([$email]);
 
     $user = $check->fetch();
 
-    if ($user && password_verify($password, $user['Mot-de-passe'])) {
+    if ($user && password_verify($password, $user['mot_de_passe'])) {
 
     // ✅ Generate secure token
     $token = bin2hex(random_bytes(32));
 
     // ✅ Save token in DB
-    $update = $pdo->prepare("UPDATE utilisateurs SET token = ? WHERE ID = ?");
-    $update->execute([$token, $user['ID']]);
+    $update = $pdo->prepare("UPDATE utilisateurs SET token = ? WHERE id = ?");
+    $update->execute([$token, $user['id']]);
 
     // ✅ Store token in cookie (recommended)
     setcookie("auth_token", $token, time() + (86400 * 7), "/", "", false, true); // 7 days

@@ -18,7 +18,7 @@
         div.innerHTML = `
             <h3>${product.name}</h3>
             <p>${product.description}</p>
-            <p class="price">${product.price}</p>
+            <p class="price">${product.price} €</p>
         `;
 
         const btnDetails = document.createElement('button');

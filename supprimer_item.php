@@ -4,7 +4,7 @@ require_once 'config/database.php';
 
 if (isset($_GET['id'])) {
     $stmt = $pdo->prepare("DELETE FROM panier WHERE id = ? AND utilisateur_id = ?");
-    $stmt->execute([$_GET['id'], $currentUser['ID']]);
+    $stmt->execute([$_GET['id'], $currentUser['id']]);
 }
 
 header("Location: index.php?page=panier");

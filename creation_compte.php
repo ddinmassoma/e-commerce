@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // ✅ Check if email already exists
-    $check = $pdo->prepare("SELECT ID FROM utilisateurs WHERE `E-mail` = ?");
+    $check = $pdo->prepare("SELECT id FROM utilisateurs WHERE email = ?");
     $check->execute([$email]);
 
     if ($check->fetch()) {
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // ✅ Insert user
     $stmt = $pdo->prepare("
-        INSERT INTO utilisateurs (Nom, Prenom, `E-mail`, `Mot-de-passe`)
+        INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe)
         VALUES (?, ?, ?, ?)
     ");
 
