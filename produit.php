@@ -1,35 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <link rel="stylesheet" href="style.css">
-        <title>TechStore</title>
-    </head>
-    <body>
-        <header>
-            <h1>TechStore</h1>
-            <nav>
-                <a href="index.php?page=accueil">Accueil</a>
-                <a href="index.php?page=catalogue">Catalogue</a>
-                <a href="index.php?page=formulaire_contact">Contact</a>
-                <a href="index.php?page=mention_legale">Mention légale</a>
-                <a href="index.php?page=Condition">Conditions d'utilisation</a>
-                <a href="index.php?page=profil">Profil</a>
-                <a href="index.php?page=connexion">Connexion</a>   <!-- @TODO : Afficher conditionellement Se Connecter ou Se Déconnecter Suite a la disposition du token -->
-                 <a href="index.php?page=panier" class="cart-link">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span class="cart-count">0</span>
-                </a>
-            
-            </nav>
-        </header>
-        <section class="hero">
-            <h2>Leader international en informatique</h2>
-            <p>Nous sélectionnons les meilleurs équipements informatiques pour les développeurs et autres amateurs de technologie.</p>
-        </section>
-        <div id="fiche-produit">
+<div id="fiche-produit">
 
         </div>
         
@@ -256,10 +225,3 @@
             
         }
         </script>
-        <footer>
-            <p>TechStore</p>
-            <p>contact@techstore.fr</p>
-            <p>01 23 45 67 89</p>
-        </footer>
-    </body>
-</html>

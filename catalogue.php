@@ -4,7 +4,7 @@
 <script>
     const container = document.getElementById('product');
     function voirProduit(id) {
-            window.location.href = "produit.html?id=" + id;
+            window.location.href = "index.php?page=produit&id=" + id;
         }
     fetch('products.json')
     .then(response => response.json())

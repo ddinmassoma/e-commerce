@@ -116,6 +116,9 @@ if (isset($_COOKIE['auth_token'])) {
                 case 'commandes':
                     include 'commandes.php';
                     break;
+                case 'produit':
+                    include 'produit.php';
+                    break;
 
 
                 default:

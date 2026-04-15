@@ -169,6 +169,10 @@ if($action === 'commander') {
         $total
     ]);
 
+    //Vider le panier de l'utilisateur
+    $stmt = $pdo->prepare("DELETE FROM panier WHERE utilisateur_id = ?");
+    $stmt->execute([$currentUser['id']]);
+
     if ($success) {
             echo "Commande passée avec succès !";
             // Optionnel : vider le panier ici

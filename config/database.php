@@ -1,6 +1,4 @@
 <?php
-#$host = "localhost";
-#$dbname = "dylan_ecom";
 $host = "127.0.0.1";
 $dbname = "e-commerce";
 $username = "root";
